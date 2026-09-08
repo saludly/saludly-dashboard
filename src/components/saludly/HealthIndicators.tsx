@@ -1,9 +1,9 @@
-import { healthIndicators } from "../../data/biomarkers";
+import { healthIndicators, overallHealthScore } from "../../data/biomarkers";
 import { softClass, textClass } from "./status";
 
 export function HealthIndicators() {
   return (
-    <section className="mt-20">
+    <section className="mt-16">
       <div className="flex items-baseline justify-between border-b border-rule pb-4">
         <h2 className="text-2xl font-light tracking-tight text-ink">General health indicators</h2>
         <span className="font-mono text-[11px] uppercase tracking-[0.18em] text-ink-faint">
@@ -11,7 +11,39 @@ export function HealthIndicators() {
         </span>
       </div>
 
-      <div className="mt-6 grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
+      <div className="mt-6 rounded-2xl bg-optimal p-6 text-primary-foreground sm:p-8">
+        <div className="flex flex-wrap items-end justify-between gap-6">
+          <div>
+            <span className="text-[11px] uppercase tracking-[0.2em] text-primary-foreground/70">
+              Health score
+            </span>
+            <div className="mt-2 flex items-baseline gap-2">
+              <span className="font-mono text-6xl tabular-nums leading-none sm:text-7xl">
+                {overallHealthScore}
+              </span>
+              <span className="text-sm text-primary-foreground/70">/ 100</span>
+            </div>
+            <p className="mt-3 max-w-md text-sm leading-relaxed text-primary-foreground/80">
+              A weighted blend of your cardiovascular, metabolic, immune, nutrient and hormonal
+              scores.
+            </p>
+          </div>
+          <div className="flex flex-wrap gap-x-6 gap-y-2">
+            {healthIndicators
+              .filter((i) => i.weight > 0)
+              .map((i) => (
+                <div key={i.label} className="flex items-baseline gap-1.5">
+                  <span className="font-mono text-sm tabular-nums">{i.value}</span>
+                  <span className="text-[10px] uppercase tracking-[0.1em] text-primary-foreground/60">
+                    {i.label.replace(" score", "")} · {Math.round(i.weight * 100)}%
+                  </span>
+                </div>
+              ))}
+          </div>
+        </div>
+      </div>
+
+      <div className="mt-3 grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
         {healthIndicators.map((i) => (
           <div
             key={i.label}
@@ -34,6 +66,11 @@ export function HealthIndicators() {
               <span className="text-[11px] text-ink-faint">{i.unit}</span>
             </div>
             <p className="mt-2 text-xs leading-relaxed text-ink-muted">{i.note}</p>
+            {i.weight > 0 && (
+              <p className="mt-2 font-mono text-[10px] uppercase tracking-[0.12em] text-ink-faint">
+                Weight {Math.round(i.weight * 100)}% of health score
+              </p>
+            )}
           </div>
         ))}
       </div>

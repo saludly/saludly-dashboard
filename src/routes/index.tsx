@@ -61,6 +61,8 @@ function Index() {
 
         <BodyHero />
 
+        <HealthIndicators />
+
         <section
           className="rise mt-16"
           style={{ "--rise-delay": "0.3s" } as CSSProperties}
@@ -94,9 +96,6 @@ function Index() {
             />
           ))}
         </section>
-
-        <HealthIndicators />
-
         <footer className="mt-20 border-t border-rule py-8 text-xs text-ink-faint">
           Sample data shown for demonstration only. Saludly does not provide medical advice.
         </footer>
