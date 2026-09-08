@@ -186,11 +186,11 @@ export interface HealthIndicator {
 }
 
 export const healthIndicators: HealthIndicator[] = [
-  { label: "Cardiovascular score", value: "61", unit: "/ 100", note: "ApoB and LDL particle count elevated", status: "critical", weight: 0.25 },
-  { label: "Metabolic score", value: "68", unit: "/ 100", note: "Insulin resistance is the main drag", status: "attention", weight: 0.25 },
-  { label: "Immune resilience", value: "84", unit: "/ 100", note: "Strong, mild inflammatory background", status: "optimal", weight: 0.2 },
-  { label: "Nutrient status", value: "72", unit: "/ 100", note: "Vitamin D and omega-3 are low", status: "attention", weight: 0.15 },
-  { label: "Hormonal balance", value: "66", unit: "/ 100", note: "Free testosterone below range", status: "attention", weight: 0.15 },
+  { label: "Cardiovascular score", value: "62", unit: "/ 100", note: "ApoB and LDL particle count elevated", status: "critical", weight: 0.25 },
+  { label: "Metabolic score", value: "69", unit: "/ 100", note: "Insulin resistance is the main drag", status: "attention", weight: 0.25 },
+  { label: "Immune resilience", value: "86", unit: "/ 100", note: "Strong, mild inflammatory background", status: "optimal", weight: 0.2 },
+  { label: "Nutrient status", value: "74", unit: "/ 100", note: "Vitamin D and omega-3 are low", status: "attention", weight: 0.15 },
+  { label: "Hormonal balance", value: "68", unit: "/ 100", note: "Free testosterone below range", status: "attention", weight: 0.15 },
   { label: "Biological age", value: "41.2", unit: "years", note: "3.4 years above chronological", status: "attention", weight: 0 },
   { label: "Resting heart rate", value: "58", unit: "bpm", note: "Rolling 30-day average", status: "optimal", weight: 0 },
   { label: "VO₂ max", value: "44.8", unit: "mL/kg/min", note: "Top quartile for your age group", status: "optimal", weight: 0 },
