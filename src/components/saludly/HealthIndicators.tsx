@@ -15,13 +15,13 @@ export function HealthIndicators() {
         <div className="flex flex-wrap items-end justify-between gap-6">
           <div>
             <span className="text-[11px] uppercase tracking-[0.2em] text-primary-foreground/70">
-              Health score
+              Saludly score
             </span>
             <div className="mt-2 flex items-baseline gap-2">
               <span className="font-mono text-6xl tabular-nums leading-none sm:text-7xl">
                 {overallHealthScore}
               </span>
-              <span className="text-sm text-primary-foreground/70">/ 100</span>
+              <span className="text-sm text-primary-foreground/70">%</span>
             </div>
             <p className="mt-3 max-w-md text-sm leading-relaxed text-primary-foreground/80">
               A weighted blend of your cardiovascular, metabolic, immune, nutrient and hormonal
