@@ -77,18 +77,13 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
     meta: [
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
-      { title: "Customer health dashboard" },
-      { name: "description", content: "An editorial view of customer health: every account plotted by health score and sized by ARR." },
-      { name: "author", content: "Lovable" },
-      { property: "og:title", content: "Customer health dashboard" },
-      { property: "og:description", content: "An editorial view of customer health: every account plotted by health score and sized by ARR." },
+      { title: "Saludly — Full body biomarker dashboard" },
+      { name: "description", content: "A minimal, futuristic health dashboard: a 3D body model, 100+ biomarkers grouped by health system, and general health indicators." },
+      { name: "author", content: "Saludly" },
+      { property: "og:title", content: "Saludly — Full body biomarker dashboard" },
+      { property: "og:description", content: "A minimal, futuristic health dashboard: a 3D body model, 100+ biomarkers grouped by health system, and general health indicators." },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
-      { name: "twitter:site", content: "@Lovable" },
-      { name: "twitter:title", content: "Customer health dashboard" },
-      { name: "twitter:description", content: "An editorial view of customer health: every account plotted by health score and sized by ARR." },
-      { property: "og:image", content: "https://pub-bb2e103a32db4e198524a2e9ed8f35b4.r2.dev/3d604e48-35a9-4815-b229-1f829f319bf9/id-preview-9147e2ac--787bddb2-1854-4942-b787-7a8a1342155a.lovable.app-1785816109832.png" },
-      { name: "twitter:image", content: "https://pub-bb2e103a32db4e198524a2e9ed8f35b4.r2.dev/3d604e48-35a9-4815-b229-1f829f319bf9/id-preview-9147e2ac--787bddb2-1854-4942-b787-7a8a1342155a.lovable.app-1785816109832.png" },
     ],
     links: [
       {
@@ -99,11 +94,12 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       { rel: "preconnect", href: "https://fonts.gstatic.com", crossOrigin: "anonymous" },
       {
         rel: "stylesheet",
-        href: "https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=Newsreader:ital,wght@0,400;0,500;1,400&family=Work+Sans:wght@400;500&display=swap",
+        href: "https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500&family=Manrope:wght@300;400;500;600&display=swap",
       },
       { rel: "icon", href: "/favicon.ico", type: "image/x-icon" },
     ],
   }),
+
   shellComponent: RootShell,
   component: RootComponent,
   notFoundComponent: NotFoundComponent,
