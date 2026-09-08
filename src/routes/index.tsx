@@ -61,6 +61,8 @@ function Index() {
 
         <BodyHero />
 
+        <HealthIndicators />
+
         <section
           className="rise mt-16"
           style={{ "--rise-delay": "0.3s" } as CSSProperties}
