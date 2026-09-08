@@ -76,11 +76,28 @@ export function BodyHero() {
         </div>
 
         <div className="rise order-1 lg:order-2" style={{ ["--rise-delay" as string]: "0.1s" }}>
+          <div className="mx-auto mb-4 flex w-fit gap-1 rounded-full border border-rule p-1">
+            {(["male", "female"] as const).map((s) => (
+              <button
+                key={s}
+                type="button"
+                onClick={() => setSex(s)}
+                aria-pressed={sex === s}
+                className={`rounded-full px-4 py-1.5 text-[11px] uppercase tracking-[0.14em] transition-colors duration-300 ${
+                  sex === s
+                    ? "bg-optimal text-primary-foreground"
+                    : "text-ink-muted hover:text-ink"
+                }`}
+              >
+                {s === "male" ? "Man" : "Woman"}
+              </button>
+            ))}
+          </div>
           <div className="relative mx-auto w-[240px] sm:w-[300px]">
             <div className="breathe absolute inset-x-6 top-[12%] bottom-[8%] rounded-full bg-optimal-soft blur-3xl" />
             <img
-              src={bodyImg}
-              alt="Three-dimensional model of a human body showing analysed health systems"
+              src={sex === "male" ? bodyImg : bodyFemaleImg}
+              alt={`Three-dimensional model of a ${sex === "male" ? "male" : "female"} human body showing analysed health systems`}
               width={768}
               height={1280}
               className="relative w-full select-none"
