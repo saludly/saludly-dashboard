@@ -1,35 +1,22 @@
 import { useMemo, useState, type CSSProperties } from "react";
 import { createFileRoute } from "@tanstack/react-router";
-import { Activity } from "lucide-react";
-import { sum } from "d3-array";
-import { Beeswarm, type BeeswarmView } from "../components/chart/Beeswarm";
-import { AccountPanel } from "../components/AccountPanel";
-import { StatRow } from "../components/StatRow";
-import { Watchlist } from "../components/Watchlist";
-import {
-  SegmentFilter,
-  ViewToggle,
-  type SegmentFilterValue,
-} from "../components/SegmentFilter";
-import { ThemeToggle } from "../components/ThemeToggle";
-import { TemplateGuide } from "../components/TemplateGuide";
-import { accounts } from "../data/accounts";
-import { formatArrTotal } from "../lib/health-color";
+import { BodyHero } from "../components/saludly/BodyHero";
+import { CategorySection } from "../components/saludly/CategorySection";
+import { BiomarkerDetail } from "../components/saludly/BiomarkerDetail";
+import { HealthIndicators } from "../components/saludly/HealthIndicators";
+import { biomarkers, categories, type Biomarker, type BiomarkerStatus } from "../data/biomarkers";
+
+const TITLE = "Saludly — Full body biomarker dashboard";
+const DESCRIPTION =
+  "A minimal, futuristic health dashboard: a 3D body model, 100+ biomarkers grouped by health system, and general health indicators at a glance.";
 
 export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
-      { title: "Customer health dashboard" },
-      {
-        name: "description",
-        content:
-          "An editorial view of customer health: every account plotted by health score and sized by ARR.",
-      },
-      { property: "og:title", content: "Customer health dashboard" },
-      {
-        property: "og:description",
-        content: "An editorial view of customer health: every account plotted by health score and sized by ARR.",
-      },
+      { title: TITLE },
+      { name: "description", content: DESCRIPTION },
+      { property: "og:title", content: TITLE },
+      { property: "og:description", content: DESCRIPTION },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
     ],
@@ -37,83 +24,85 @@ export const Route = createFileRoute("/")({
   component: Index,
 });
 
-function Index() {
-  const [segment, setSegment] = useState<SegmentFilterValue>("All");
-  const [view, setView] = useState<BeeswarmView>("combined");
-  const [selectedId, setSelectedId] = useState<string | null>(null);
-  const bookArr = useMemo(() => sum(accounts, (a) => a.arr), []);
+type Filter = "all" | BiomarkerStatus;
 
-  const highlightedCount =
-    segment === "All"
-      ? accounts.length
-      : accounts.filter((a) => a.segment === segment).length;
-  const selected = accounts.find((a) => a.id === selectedId) ?? null;
+const FILTERS: { key: Filter; label: string }[] = [
+  { key: "all", label: "All" },
+  { key: "optimal", label: "Optimal" },
+  { key: "attention", label: "Attention" },
+  { key: "critical", label: "Critical attention" },
+];
+
+function Index() {
+  const [selected, setSelected] = useState<Biomarker | null>(null);
+  const [filter, setFilter] = useState<Filter>("all");
+
+  const grouped = useMemo(() => {
+    const list = filter === "all" ? biomarkers : biomarkers.filter((b) => b.status === filter);
+    return categories
+      .map((c) => ({ category: c, items: list.filter((b) => b.category === c) }))
+      .filter((g) => g.items.length > 0);
+  }, [filter]);
 
   return (
     <main className="min-h-screen bg-background">
-      <div className="mx-auto max-w-6xl px-8 py-10">
-        <header
-          className="page-rise flex items-baseline justify-between"
-          style={{ "--rise-delay": "0s" } as CSSProperties}
-        >
-          <div className="flex flex-wrap items-baseline gap-x-5 gap-y-1">
-            <h1 className="font-serif text-3xl leading-tight tracking-tight text-ink">
-              <Activity
-                className="mr-2.5 inline-block h-6 w-6 -translate-y-0.5 text-ink"
-                strokeWidth={2.25}
-                aria-hidden="true"
-              />
-              Customer health
-            </h1>
-            <p className="font-mono text-[11px] uppercase tracking-[0.2em] text-ink-faint tabular-nums">
-              {accounts.length} accounts / {formatArrTotal(bookArr)} ARR
-            </p>
-          </div>
+      <div className="mx-auto max-w-7xl px-6 py-8 sm:px-10">
+        <header className="flex items-center justify-between">
           <div className="flex items-center gap-2.5">
-            <TemplateGuide />
-            <ThemeToggle />
+            <span className="flex h-7 w-7 items-center justify-center rounded-full bg-optimal">
+              <span className="h-2 w-2 rounded-full bg-background" />
+            </span>
+            <span className="text-lg tracking-tight text-ink">Saludly</span>
           </div>
+          <span className="font-mono text-[11px] uppercase tracking-[0.2em] text-ink-faint">
+            Panel · March 2026
+          </span>
         </header>
 
-        <div className="page-rise" style={{ "--rise-delay": "0.12s" } as CSSProperties}>
-          <StatRow accounts={accounts} />
-        </div>
+        <BodyHero />
 
         <section
-          className="page-rise mt-12"
-          style={{ "--rise-delay": "0.24s" } as CSSProperties}
+          className="rise mt-16"
+          style={{ "--rise-delay": "0.3s" } as CSSProperties}
         >
-          <div className="flex items-baseline justify-between">
-            <div className="flex items-baseline gap-10">
-              <ViewToggle value={view} onChange={setView} />
-              <SegmentFilter value={segment} onChange={setSegment} />
+          <div className="flex flex-wrap items-baseline justify-between gap-4 border-b border-rule pb-4">
+            <h2 className="text-2xl font-light tracking-tight text-ink">Biomarkers</h2>
+            <div className="flex flex-wrap gap-2">
+              {FILTERS.map((f) => (
+                <button
+                  key={f.key}
+                  type="button"
+                  onClick={() => setFilter(f.key)}
+                  className={`rounded-full border px-3.5 py-1.5 text-[11px] uppercase tracking-[0.12em] transition-colors duration-300 ${
+                    filter === f.key
+                      ? "border-optimal bg-optimal text-primary-foreground"
+                      : "border-rule text-ink-muted hover:border-ink/20 hover:text-ink"
+                  }`}
+                >
+                  {f.label}
+                </button>
+              ))}
             </div>
-            {segment !== "All" && (
-              <span className="font-mono text-[11px] text-ink-faint tabular-nums">
-                {highlightedCount} accounts
-              </span>
-            )}
           </div>
-          <div className="mt-4">
-            <Beeswarm
-              accounts={accounts}
-              view={view}
-              highlight={segment}
-              selectedId={selectedId}
-              onSelect={setSelectedId}
+
+          {grouped.map((g) => (
+            <CategorySection
+              key={g.category}
+              category={g.category}
+              items={g.items}
+              onSelect={setSelected}
             />
-            <p className="mt-1 text-center text-[11px] tracking-tight text-ink-faint">
-              Health score
-            </p>
-          </div>
+          ))}
         </section>
 
-        <div className="page-rise" style={{ "--rise-delay": "0.38s" } as CSSProperties}>
-          <Watchlist accounts={accounts} selectedId={selectedId} onSelect={setSelectedId} />
-        </div>
+        <HealthIndicators />
 
-        <AccountPanel account={selected} onClose={() => setSelectedId(null)} />
+        <footer className="mt-20 border-t border-rule py-8 text-xs text-ink-faint">
+          Sample data shown for demonstration only. Saludly does not provide medical advice.
+        </footer>
       </div>
+
+      <BiomarkerDetail biomarker={selected} onClose={() => setSelected(null)} />
     </main>
   );
 }
