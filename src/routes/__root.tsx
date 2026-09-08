@@ -106,15 +106,13 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
   errorComponent: ErrorComponent,
 });
 
-const themeInitScript = `(function(){try{if(localStorage.getItem("theme")==="light")document.documentElement.classList.remove("dark");localStorage.removeItem("dev-typography")}catch(e){}})();`;
-
 function RootShell({ children }: { children: ReactNode }) {
   return (
-    <html lang="en" className="dark" suppressHydrationWarning>
+    <html lang="en" suppressHydrationWarning>
       <head>
-        <script dangerouslySetInnerHTML={{ __html: themeInitScript }} />
         <HeadContent />
       </head>
+
       <body>
         {children}
         <Scripts />
