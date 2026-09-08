@@ -44,20 +44,35 @@ export function BodyHero() {
             {biomarkers.length} biomarkers analysed across nine health systems. Every result is
             mapped to its optimal range, not just the lab&apos;s normal range.
           </p>
-          <dl className="mt-8 grid max-w-sm grid-cols-3 gap-px overflow-hidden rounded-2xl border border-rule bg-rule">
-            {[
-              { n: optimal, l: "Optimal", c: "text-optimal" },
-              { n: attention, l: "Attention", c: "text-attention" },
-              { n: critical, l: "Critical", c: "text-critical" },
-            ].map((s) => (
-              <div key={s.l} className="bg-background px-4 py-4">
-                <dd className={`font-mono text-2xl tabular-nums ${s.c}`}>{s.n}</dd>
-                <dt className="mt-1 text-[11px] uppercase tracking-[0.14em] text-ink-faint">
-                  {s.l}
-                </dt>
-              </div>
-            ))}
-          </dl>
+          <div className="mt-8 max-w-sm rounded-3xl border border-rule bg-background px-6 py-5 shadow-[0_16px_40px_-32px_rgba(20,30,60,0.55)]">
+            <dl className="flex flex-wrap items-start gap-x-8 gap-y-4">
+              {[
+                { n: total, l: "Total", c: "text-ink" },
+                { n: optimal, l: "Optimal", c: "text-optimal" },
+                { n: attention, l: "Attention", c: "text-attention" },
+                { n: critical, l: "Critical", c: "text-critical" },
+              ].map((s) => (
+                <div key={s.l}>
+                  <dd className={`font-mono text-2xl tabular-nums ${s.c}`}>{s.n}</dd>
+                  <dt className="mt-1 text-[12px] text-ink-faint">{s.l}</dt>
+                </div>
+              ))}
+            </dl>
+            <div className="mt-5 flex gap-1.5">
+              <span
+                className="h-1.5 rounded-full bg-optimal"
+                style={{ width: `${pct(optimal)}%` }}
+              />
+              <span
+                className="h-1.5 rounded-full bg-attention"
+                style={{ width: `${pct(attention)}%` }}
+              />
+              <span
+                className="h-1.5 rounded-full bg-critical"
+                style={{ width: `${pct(critical)}%` }}
+              />
+            </div>
+          </div>
         </div>
 
         <div className="rise order-1 lg:order-2" style={{ ["--rise-delay" as string]: "0.1s" }}>
