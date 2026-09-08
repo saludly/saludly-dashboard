@@ -1,4 +1,6 @@
+import { useState } from "react";
 import bodyImg from "../../assets/body.png";
+import bodyFemaleImg from "../../assets/body-female.png";
 import { biomarkers, countBy } from "../../data/biomarkers";
 
 interface Marker {
