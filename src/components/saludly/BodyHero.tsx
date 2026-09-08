@@ -20,9 +20,13 @@ const MARKERS: Marker[] = [
 ];
 
 export function BodyHero() {
+  const [sex, setSex] = useState<"male" | "female">("male");
   const optimal = countBy("optimal");
   const attention = countBy("attention");
   const critical = countBy("critical");
+  const total = biomarkers.length;
+  const pct = (n: number) => (n / total) * 100;
+
 
   return (
     <section className="relative overflow-hidden pb-8 pt-6">
