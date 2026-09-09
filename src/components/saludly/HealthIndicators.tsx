@@ -1,6 +1,36 @@
 import { healthIndicators, overallHealthScore } from "../../data/biomarkers";
 import { softClass, textClass } from "./status";
 
+const bioAge = healthIndicators.find((i) => i.label === "Biological age");
+
+/** Semicircular gauge, value mapped across [min,max]. */
+function Gauge({ value, min, max }: { value: number; min: number; max: number }) {
+  const pct = Math.min(1, Math.max(0, (value - min) / (max - min)));
+  const r = 62;
+  const len = Math.PI * r;
+  return (
+    <svg viewBox="0 0 160 92" className="w-full max-w-[220px]">
+      <path
+        d="M 18 80 A 62 62 0 0 1 142 80"
+        fill="none"
+        stroke="currentColor"
+        className="text-rule"
+        strokeWidth="8"
+        strokeLinecap="round"
+      />
+      <path
+        d="M 18 80 A 62 62 0 0 1 142 80"
+        fill="none"
+        stroke="currentColor"
+        className="text-attention"
+        strokeWidth="8"
+        strokeLinecap="round"
+        strokeDasharray={`${len * pct} ${len}`}
+      />
+    </svg>
+  );
+}
+
 export function HealthIndicators() {
   return (
     <section className="mt-16">
