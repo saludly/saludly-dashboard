@@ -41,40 +41,45 @@ export function HealthIndicators() {
         </span>
       </div>
 
-      <div className="mt-6 rounded-2xl bg-optimal p-6 text-primary-foreground sm:p-8">
-        <div className="flex flex-wrap items-end justify-between gap-6">
-          <div>
-            <span className="text-[11px] uppercase tracking-[0.2em] text-primary-foreground/70">
-              Saludly score
+      <div className="mt-6 grid gap-3 sm:grid-cols-2 lg:max-w-2xl">
+        <div className="flex aspect-[5/4] flex-col justify-between rounded-2xl bg-optimal p-6 text-primary-foreground sm:aspect-square">
+          <span className="text-[11px] uppercase tracking-[0.2em] text-primary-foreground/70">
+            Saludly score
+          </span>
+          <div className="flex items-baseline gap-1">
+            <span className="font-mono text-6xl tabular-nums leading-none">
+              {overallHealthScore}
             </span>
-            <div className="mt-2 flex items-baseline gap-2">
-              <span className="font-mono text-6xl tabular-nums leading-none sm:text-7xl">
-                {overallHealthScore}
-              </span>
-              <span className="text-sm text-primary-foreground/70">%</span>
-            </div>
-            <p className="mt-3 max-w-md text-sm leading-relaxed text-primary-foreground/80">
-              A weighted blend of your cardiovascular, metabolic, immune, nutrient and hormonal
-              scores.
-            </p>
-          </div>
-          <div className="flex flex-wrap gap-x-6 gap-y-2">
-            {healthIndicators
-              .filter((i) => i.weight > 0)
-              .map((i) => (
-                <div key={i.label} className="flex items-baseline gap-1.5">
-                  <span className="font-mono text-sm tabular-nums">{i.value}</span>
-                  <span className="text-[10px] uppercase tracking-[0.1em] text-primary-foreground/60">
-                    {i.label.replace(" score", "")} · {Math.round(i.weight * 100)}%
-                  </span>
-                </div>
-              ))}
+            <span className="font-mono text-xl text-primary-foreground/60">/100</span>
           </div>
         </div>
+
+        {bioAge && (
+          <div className="relative flex aspect-[5/4] flex-col justify-between overflow-hidden rounded-2xl border border-rule bg-background p-6 sm:aspect-square">
+            <div
+              aria-hidden
+              className="pointer-events-none absolute -right-10 -top-10 h-40 w-40 rounded-full bg-attention-soft blur-2xl"
+            />
+            <span className="relative text-[11px] uppercase tracking-[0.2em] text-ink-faint">
+              Biological age
+            </span>
+            <div className="relative flex flex-col items-center">
+              <Gauge value={Number.parseFloat(bioAge.value)} min={25} max={60} />
+              <div className="-mt-10 flex items-baseline gap-1">
+                <span className="font-mono text-5xl tabular-nums leading-none text-ink">
+                  {bioAge.value}
+                </span>
+                <span className="text-xs text-ink-faint">yrs</span>
+              </div>
+            </div>
+          </div>
+        )}
       </div>
 
       <div className="mt-3 grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
-        {healthIndicators.map((i) => (
+        {healthIndicators
+          .filter((i) => i.label !== "Biological age")
+          .map((i) => (
           <div
             key={i.label}
             className="rounded-2xl border border-rule bg-background p-5 transition-colors duration-300 hover:border-ink/15"
