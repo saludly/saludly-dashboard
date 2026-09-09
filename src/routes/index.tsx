@@ -64,7 +64,8 @@ function Index() {
         <HealthIndicators />
 
         <section
-          className="rise mt-16"
+          id="biomarcadores"
+          className="rise mt-16 scroll-mt-24"
           style={{ "--rise-delay": "0.3s" } as CSSProperties}
         >
           <div className="flex flex-wrap items-baseline justify-between gap-4 border-b border-rule pb-4">

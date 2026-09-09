@@ -10,33 +10,53 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as ProductosRouteImport } from './routes/productos'
+import { Route as ProtocoloRouteImport } from './routes/protocolo'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const ProductosRoute = ProductosRouteImport.update({
+  id: '/productos',
+  path: '/productos',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ProtocoloRoute = ProtocoloRouteImport.update({
+  id: '/protocolo',
+  path: '/protocolo',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/productos': typeof ProductosRoute
+  '/protocolo': typeof ProtocoloRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/productos': typeof ProductosRoute
+  '/protocolo': typeof ProtocoloRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/productos': typeof ProductosRoute
+  '/protocolo': typeof ProtocoloRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/'
+  fullPaths: '/' | '/productos' | '/protocolo'
   fileRoutesByTo: FileRoutesByTo
-  to: '/'
-  id: '__root__' | '/'
+  to: '/' | '/productos' | '/protocolo'
+  id: '__root__' | '/' | '/productos' | '/protocolo'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  ProductosRoute: typeof ProductosRoute
+  ProtocoloRoute: typeof ProtocoloRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -48,11 +68,27 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/productos': {
+      id: '/productos'
+      path: '/productos'
+      fullPath: '/productos'
+      preLoaderRoute: typeof ProductosRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/protocolo': {
+      id: '/protocolo'
+      path: '/protocolo'
+      fullPath: '/protocolo'
+      preLoaderRoute: typeof ProtocoloRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  ProductosRoute: ProductosRoute,
+  ProtocoloRoute: ProtocoloRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
