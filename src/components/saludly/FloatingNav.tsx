@@ -1,11 +1,11 @@
 import { Link, useRouterState } from "@tanstack/react-router";
 
-const ITEMS = [
-  { label: "INICIO", to: "/", hash: undefined },
-  { label: "PROTOCOLO", to: "/protocolo", hash: undefined },
+const ITEMS: { label: string; to: "/" | "/protocolo" | "/productos"; hash?: string }[] = [
+  { label: "INICIO", to: "/" },
+  { label: "PROTOCOLO", to: "/protocolo" },
   { label: "BIOMARCADORES", to: "/", hash: "biomarcadores" },
-  { label: "PRODUCTOS", to: "/productos", hash: undefined },
-] as const;
+  { label: "PRODUCTOS", to: "/productos" },
+];
 
 export function FloatingNav() {
   const { pathname, hash } = useRouterState({ select: (s) => s.location });
@@ -21,7 +21,7 @@ export function FloatingNav() {
           <Link
             key={item.label}
             to={item.to}
-            hash={item.hash}
+            {...(item.hash ? { hash: item.hash } : {})}
             className={`rounded-full px-4 py-1.5 font-mono text-[10px] uppercase tracking-[0.16em] transition-all duration-300 ${
               idx === activeIndex
                 ? "bg-background text-ink"
