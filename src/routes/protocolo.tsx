@@ -76,7 +76,7 @@ const LIFESTYLE = [
 
 function Protocolo() {
   const [active, setActive] = useState(0);
-  const step = STEPS[active];
+  const step = STEPS[active] ?? STEPS[0]!;
   const Icon = step.icon;
 
   return (
@@ -125,7 +125,7 @@ function Protocolo() {
         {/* Active step panel */}
         <section className="mt-6 rounded-3xl border border-rule bg-surface p-6 sm:p-8">
           <div className="flex items-center gap-3">
-            <span className="grid h-11 w-11 shrink-0 place-items-center rounded-2xl bg-score/10 text-score">
+            <span className="grid h-11 w-11 shrink-0 place-items-center rounded-2xl bg-primary/10 text-primary">
               <Icon className="h-5 w-5" strokeWidth={1.6} />
             </span>
             <h2 className="min-w-0 truncate text-xl font-light tracking-tight text-ink">
