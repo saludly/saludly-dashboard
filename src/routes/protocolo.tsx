@@ -76,7 +76,7 @@ const LIFESTYLE = [
 
 function Protocolo() {
   const [active, setActive] = useState(0);
-  const step = STEPS[active];
+  const step = STEPS[active] ?? STEPS[0]!;
   const Icon = step.icon;
 
   return (
