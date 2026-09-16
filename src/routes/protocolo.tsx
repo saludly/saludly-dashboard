@@ -1,6 +1,8 @@
 import { useState } from "react";
-import { createFileRoute } from "@tanstack/react-router";
+import { Link, createFileRoute } from "@tanstack/react-router";
 import { Droplets, Salad, Pill, Moon, Dumbbell, Sun } from "lucide-react";
+import { Button } from "../components/ui/button";
+import { findProduct, formatPrice } from "../data/products";
 
 const TITLE = "Protocolo Saludly — Plan personalizado de salud";
 const DESCRIPTION =
@@ -60,9 +62,9 @@ const STEPS = [
     intro:
       "Suplementación sugerida según tus niveles actuales (vitamina D y magnesio por debajo de rango óptimo) y hábitos clave.",
     items: [
-      { label: "Vitamina D3", detail: "2000 UI con el desayuno, hasta alcanzar rango óptimo." },
-      { label: "Magnesio glicinato", detail: "300 mg por la noche, favorece sueño y recuperación." },
-      { label: "Omega-3 (EPA/DHA)", detail: "1 g diario con comida, apoyo al perfil lipídico." },
+      { label: "Vitamina D3", detail: "2.000 UI con el desayuno, hasta alcanzar rango óptimo.", productId: "vitamina-d3-k2" },
+      { label: "Magnesio glicinato", detail: "300 mg por la noche, favorece sueño y recuperación.", productId: "magnesio-glicinato" },
+      { label: "Omega-3 (EPA/DHA)", detail: "1 g diario con comida, apoyo al perfil lipídico.", productId: "omega-3" },
       { label: "Sueño y movimiento", detail: "7–8 h de sueño, 8 000 pasos diarios y 2 sesiones de fuerza por semana." },
     ],
   },
@@ -135,15 +137,29 @@ function Protocolo() {
           <p className="mt-4 max-w-2xl text-sm leading-relaxed text-ink-muted">{step.intro}</p>
 
           <div className="mt-6 grid gap-2.5 sm:grid-cols-2">
-            {step.items.map((item) => (
+            {step.items.map((item) => {
+              const product = "productId" in item && item.productId ? findProduct(item.productId) : undefined;
+              return (
               <div
                 key={item.label}
                 className="rounded-2xl border border-rule bg-background p-5 transition-colors duration-300 hover:border-ink/15"
               >
                 <p className="text-sm font-normal text-ink">{item.label}</p>
                 <p className="mt-1.5 text-sm leading-relaxed text-ink-muted">{item.detail}</p>
+                {product && (
+                  <div className="mt-5 flex items-center gap-3 border-t border-rule pt-4">
+                    <img src={product.image} alt="" loading="lazy" width={1024} height={768} className="h-14 w-14 rounded-lg object-cover" />
+                    <div className="min-w-0 flex-1">
+                      <p className="truncate text-xs font-medium text-ink">{product.name}</p>
+                      <p className="mt-1 font-mono text-[11px] text-primary">{formatPrice(product.price)}</p>
+                    </div>
+                    <Button asChild size="sm" variant="outline">
+                      <Link to="/productos" hash={product.id}>Ver producto</Link>
+                    </Button>
+                  </div>
+                )}
               </div>
-            ))}
+            )})}
           </div>
         </section>
 
