@@ -21,8 +21,8 @@ export function renderErrorPage(): string {
       <h1>Esta página no pudo cargar</h1>
       <p>Something went wrong on our end. You can try refreshing or head back home.</p>
       <div class="actions">
-        <button class="primary" onclick="location.reload()">Try again</button>
-        <a class="secondary" href="/">Go home</a>
+        <button class="primary" onclick="location.reload()">Intentar de nuevo</button>
+        <a class="secondary" href="/">Volver al inicio</a>
       </div>
     </div>
   </body>
