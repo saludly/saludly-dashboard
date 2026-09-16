@@ -150,26 +150,62 @@ const RAW: Record<string, Row[]> = {
   ],
 };
 
+const CATEGORY_ES: Record<string, string> = {
+  Hematology: "Hematología",
+  Hormones: "Hormonas",
+  "Metabolic & glucose": "Metabolismo y glucosa",
+  Lipids: "Lípidos",
+  Vitamins: "Vitaminas",
+  Minerals: "Minerales",
+  "Liver & kidney": "Hígado y riñón",
+  "Inflammation & immunity": "Inflamación e inmunidad",
+  "Cardiovascular & other": "Cardiovascular y otros",
+};
+
+const NAME_ES: Record<string, string> = {
+  Hemoglobin: "Hemoglobina", Hematocrit: "Hematocrito", "Red blood cells": "Glóbulos rojos", "White blood cells": "Glóbulos blancos", Platelets: "Plaquetas", Neutrophils: "Neutrófilos", Lymphocytes: "Linfocitos", Monocytes: "Monocitos", Eosinophils: "Eosinófilos", Basophils: "Basófilos", Reticulocytes: "Reticulocitos",
+  "Free T4": "T4 libre", "Free T3": "T3 libre", "Reverse T3": "T3 reversa", "Total testosterone": "Testosterona total", "Free testosterone": "Testosterona libre", "Cortisol (AM)": "Cortisol matutino", Estradiol: "Estradiol", Progesterone: "Progesterona", Prolactin: "Prolactina", "Parathyroid hormone": "Hormona paratiroidea", "Insulin (fasting)": "Insulina en ayunas", Leptin: "Leptina",
+  "Glucose (fasting)": "Glucosa en ayunas", "Uric acid": "Ácido úrico", Lactate: "Lactato", Adiponectin: "Adiponectina", Fructosamine: "Fructosamina",
+  "Total cholesterol": "Colesterol total", "LDL cholesterol": "Colesterol LDL", "HDL cholesterol": "Colesterol HDL", Triglycerides: "Triglicéridos", "Non-HDL cholesterol": "Colesterol no HDL", "Lipoprotein(a)": "Lipoproteína(a)", "LDL particle number": "Número de partículas LDL", "Small dense LDL": "LDL pequeñas y densas", "Remnant cholesterol": "Colesterol remanente", "Cholesterol / HDL ratio": "Relación colesterol / HDL",
+  "Vitamin D (25-OH)": "Vitamina D (25-OH)", "Vitamin B12": "Vitamina B12", Folate: "Folato", "Vitamin B6": "Vitamina B6", "Vitamin B1": "Vitamina B1", "Vitamin A": "Vitamina A", "Vitamin E": "Vitamina E", "Vitamin K1": "Vitamina K1", "Vitamin C": "Vitamina C", Biotin: "Biotina", Niacin: "Niacina", "Omega-3 index": "Índice omega-3", "Coenzyme Q10": "Coenzima Q10",
+  Ferritin: "Ferritina", Iron: "Hierro", "Transferrin saturation": "Saturación de transferrina", Magnesium: "Magnesio", Zinc: "Zinc", Copper: "Cobre", Selenium: "Selenio", Calcium: "Calcio", Phosphorus: "Fósforo", Sodium: "Sodio", Potassium: "Potasio", Chloride: "Cloruro", Iodine: "Yodo",
+  "Total bilirubin": "Bilirrubina total", Albumin: "Albúmina", "Total protein": "Proteína total", Creatinine: "Creatinina", "Urine albumin / creatinine": "Albúmina / creatinina en orina",
+  Homocysteine: "Homocisteína", Fibrinogen: "Fibrinógeno", "Interleukin-6": "Interleucina-6", "Immunoglobulin G": "Inmunoglobulina G", "Immunoglobulin A": "Inmunoglobulina A", "Immunoglobulin E": "Inmunoglobulina E", "Complement C3": "Complemento C3", "ANA screen": "Prueba ANA", "Thyroid peroxidase antibodies": "Anticuerpos contra la peroxidasa tiroidea",
+  "Telomere length": "Longitud de telómeros",
+};
+
+const ABOUT_ES: Record<string, string> = {
+  Hematology: "Ayuda a evaluar las células sanguíneas, el transporte de oxígeno y la respuesta inmunitaria.",
+  Hormones: "Refleja señales hormonales relacionadas con metabolismo, energía, estrés y función reproductiva.",
+  "Metabolic & glucose": "Ayuda a comprender el control de la glucosa, la insulina y el metabolismo energético.",
+  Lipids: "Aporta información sobre las grasas en sangre y el riesgo cardiovascular.",
+  Vitamins: "Mide un nutriente esencial para el funcionamiento, la reparación y la protección del organismo.",
+  Minerals: "Evalúa un mineral esencial para el equilibrio celular y distintas funciones del organismo.",
+  "Liver & kidney": "Ayuda a evaluar la función del hígado, los riñones y el equilibrio metabólico.",
+  "Inflammation & immunity": "Aporta información sobre inflamación, defensas y actividad del sistema inmunitario.",
+  "Cardiovascular & other": "Contribuye a valorar la salud cardiovascular y el envejecimiento celular.",
+};
+
 export const biomarkers: Biomarker[] = Object.entries(RAW).flatMap(([category, rows]) =>
   rows.map(([name, value, unit, low, high, s, about]) => ({
     id: name.toLowerCase().replace(/[^a-z0-9]+/g, "-"),
-    name,
-    category,
+    name: NAME_ES[name] ?? name,
+    category: CATEGORY_ES[category] ?? category,
     value,
     unit,
     low,
     high,
     status: STATUS[s],
-    about,
+    about: ABOUT_ES[category] ?? about,
   })),
 );
 
-export const categories = Object.keys(RAW);
+export const categories = Object.keys(RAW).map((category) => CATEGORY_ES[category] ?? category);
 
 export const statusLabel: Record<BiomarkerStatus, string> = {
-  optimal: "Optimal",
-  attention: "Attention",
-  critical: "Critical attention",
+  optimal: "Óptimo",
+  attention: "Atención",
+  critical: "Atención crítica",
 };
 
 export const countBy = (status: BiomarkerStatus) =>
@@ -186,14 +222,14 @@ export interface HealthIndicator {
 }
 
 export const healthIndicators: HealthIndicator[] = [
-  { label: "Cardiovascular score", value: "62", unit: "/ 100", note: "ApoB and LDL particle count elevated", status: "critical", weight: 0.25 },
-  { label: "Metabolic score", value: "69", unit: "/ 100", note: "Insulin resistance is the main drag", status: "attention", weight: 0.25 },
-  { label: "Immune resilience", value: "86", unit: "/ 100", note: "Strong, mild inflammatory background", status: "optimal", weight: 0.2 },
-  { label: "Nutrient status", value: "74", unit: "/ 100", note: "Vitamin D and omega-3 are low", status: "attention", weight: 0.15 },
-  { label: "Hormonal balance", value: "68", unit: "/ 100", note: "Free testosterone below range", status: "attention", weight: 0.15 },
-  { label: "Biological age", value: "41.2", unit: "years", note: "3.4 years above chronological", status: "attention", weight: 0 },
-  { label: "Resting heart rate", value: "58", unit: "bpm", note: "Rolling 30-day average", status: "optimal", weight: 0 },
-  { label: "VO₂ max", value: "44.8", unit: "mL/kg/min", note: "Top quartile for your age group", status: "optimal", weight: 0 },
+  { label: "Puntaje cardiovascular", value: "62", unit: "/ 100", note: "ApoB y número de partículas LDL elevados", status: "critical", weight: 0.25 },
+  { label: "Puntaje metabólico", value: "69", unit: "/ 100", note: "La resistencia a la insulina es el principal factor", status: "attention", weight: 0.25 },
+  { label: "Resiliencia inmunitaria", value: "86", unit: "/ 100", note: "Buena respuesta con inflamación leve", status: "optimal", weight: 0.2 },
+  { label: "Estado nutricional", value: "74", unit: "/ 100", note: "Vitamina D y omega-3 por debajo del rango", status: "attention", weight: 0.15 },
+  { label: "Equilibrio hormonal", value: "68", unit: "/ 100", note: "Testosterona libre por debajo del rango", status: "attention", weight: 0.15 },
+  { label: "Edad biológica", value: "41.2", unit: "años", note: "3,4 años por encima de la edad cronológica", status: "attention", weight: 0 },
+  { label: "Frecuencia cardiaca en reposo", value: "58", unit: "lpm", note: "Promedio móvil de 30 días", status: "optimal", weight: 0 },
+  { label: "VO₂ máx.", value: "44.8", unit: "mL/kg/min", note: "Cuartil superior para tu grupo de edad", status: "optimal", weight: 0 },
 ];
 
 /** Weighted average of the /100 indicator scores. */
