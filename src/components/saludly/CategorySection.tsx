@@ -34,8 +34,8 @@ export function CategorySection({
           <h3 className="text-lg font-normal tracking-tight text-ink">{category}</h3>
         </span>
         <span className="font-mono text-[11px] tabular-nums text-ink-faint">
-          {items.length} markers
-          {flagged > 0 && <span className="text-attention"> · {flagged} flagged</span>}
+          {items.length} marcadores
+          {flagged > 0 && <span className="text-attention"> · {flagged} por revisar</span>}
         </span>
       </button>
 

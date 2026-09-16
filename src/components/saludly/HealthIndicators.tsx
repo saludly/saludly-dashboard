@@ -1,7 +1,7 @@
 import { healthIndicators, overallHealthScore } from "../../data/biomarkers";
 import { softClass, textClass } from "./status";
 
-const bioAge = healthIndicators.find((i) => i.label === "Biological age");
+const bioAge = healthIndicators.find((i) => i.label === "Edad biológica");
 
 /** Semicircular gauge, value mapped across [min,max]. */
 function Gauge({ value, min, max }: { value: number; min: number; max: number }) {
@@ -35,16 +35,16 @@ export function HealthIndicators() {
   return (
     <section className="mt-16">
       <div className="flex items-baseline justify-between border-b border-rule pb-4">
-        <h2 className="text-2xl font-light tracking-tight text-ink">General health indicators</h2>
+        <h2 className="text-2xl font-light tracking-tight text-ink">Indicadores generales de salud</h2>
         <span className="font-mono text-[11px] uppercase tracking-[0.18em] text-ink-faint">
-          Derived scores
+          Puntajes derivados
         </span>
       </div>
 
       <div className="mt-6 grid gap-3 sm:grid-cols-2 lg:max-w-2xl">
         <div className="flex aspect-[5/4] flex-col justify-between rounded-2xl bg-optimal p-6 text-primary-foreground sm:aspect-square">
           <span className="text-[11px] uppercase tracking-[0.2em] text-primary-foreground/70">
-            Saludly score
+            Puntaje Saludly
           </span>
           <div className="flex items-baseline gap-1">
             <span className="font-mono text-6xl tabular-nums leading-none">
@@ -61,7 +61,7 @@ export function HealthIndicators() {
               className="pointer-events-none absolute -right-10 -top-10 h-40 w-40 rounded-full bg-attention-soft blur-2xl"
             />
             <span className="relative text-[11px] uppercase tracking-[0.2em] text-ink-faint">
-              Biological age
+              Edad biológica
             </span>
             <div className="relative flex flex-col items-center">
               <Gauge value={Number.parseFloat(bioAge.value)} min={25} max={60} />
@@ -69,7 +69,7 @@ export function HealthIndicators() {
                 <span className="font-mono text-5xl tabular-nums leading-none text-ink">
                   {bioAge.value}
                 </span>
-                <span className="text-xs text-ink-faint">yrs</span>
+                <span className="text-xs text-ink-faint">años</span>
               </div>
             </div>
           </div>
@@ -78,7 +78,7 @@ export function HealthIndicators() {
 
       <div className="mt-3 grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
         {healthIndicators
-          .filter((i) => i.label !== "Biological age")
+          .filter((i) => i.label !== "Edad biológica")
           .map((i) => (
           <div
             key={i.label}
@@ -91,7 +91,7 @@ export function HealthIndicators() {
               <span
                 className={`rounded-full px-2 py-0.5 text-[9px] uppercase tracking-[0.12em] ${softClass[i.status]}`}
               >
-                {i.status === "critical" ? "critical" : i.status}
+                {i.status === "critical" ? "crítico" : i.status === "attention" ? "atención" : "óptimo"}
               </span>
             </div>
             <div className="mt-3 flex items-baseline gap-1.5">
@@ -103,7 +103,7 @@ export function HealthIndicators() {
             <p className="mt-2 text-xs leading-relaxed text-ink-muted">{i.note}</p>
             {i.weight > 0 && (
               <p className="mt-2 font-mono text-[10px] uppercase tracking-[0.12em] text-ink-faint">
-                Weight {Math.round(i.weight * 100)}% of health score
+                Peso: {Math.round(i.weight * 100)}% del puntaje de salud
               </p>
             )}
           </div>

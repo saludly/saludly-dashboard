@@ -4,11 +4,11 @@ import { statusLabel, type Biomarker } from "../../data/biomarkers";
 import { dotClass, rangePosition, rangeWindow, softClass, textClass } from "./status";
 
 const GUIDANCE: Record<string, string> = {
-  optimal: "This marker sits comfortably inside its optimal window. Keep doing what you are doing.",
+  optimal: "Este marcador se encuentra dentro de su rango óptimo. Continúa con tus hábitos actuales.",
   attention:
-    "This marker is drifting outside its optimal window. It is not urgent, but it is worth watching and re-testing at your next panel.",
+    "Este marcador se está alejando de su rango óptimo. No es urgente, pero conviene vigilarlo y repetirlo en tu próximo panel.",
   critical:
-    "This marker is meaningfully outside its optimal window. We recommend discussing it with a clinician before your next panel.",
+    "Este marcador está significativamente fuera de su rango óptimo. Recomendamos consultarlo con un profesional de salud antes de tu próximo panel.",
 };
 
 export function BiomarkerDetail({
@@ -41,7 +41,7 @@ export function BiomarkerDetail({
       <aside
         role="dialog"
         aria-modal="true"
-        aria-label={biomarker?.name ?? "Biomarker detail"}
+        aria-label={biomarker?.name ?? "Detalle del biomarcador"}
         className={`fixed inset-y-0 right-0 z-50 w-full max-w-md overflow-y-auto bg-background transition-transform duration-500 [transition-timing-function:cubic-bezier(0.22,1,0.36,1)] ${
           open ? "translate-x-0" : "translate-x-full"
         }`}
@@ -60,7 +60,7 @@ export function BiomarkerDetail({
               <button
                 type="button"
                 onClick={onClose}
-                aria-label="Close details"
+                aria-label="Cerrar detalles"
                 className="rounded-full border border-rule p-2 text-ink-muted transition-colors hover:bg-secondary hover:text-ink"
               >
                 <X className="h-4 w-4" />
@@ -93,21 +93,21 @@ export function BiomarkerDetail({
                 />
               </div>
               <div className="mt-3 flex justify-between font-mono text-[11px] tabular-nums text-ink-faint">
-                <span>optimal from {biomarker.low}</span>
-                <span>to {biomarker.high}</span>
+                <span>óptimo desde {biomarker.low}</span>
+                <span>hasta {biomarker.high}</span>
               </div>
             </div>
 
             <div className="mt-9 space-y-6">
               <div>
                 <h4 className="text-[11px] uppercase tracking-[0.18em] text-ink-faint">
-                  What it measures
+                  Qué mide
                 </h4>
                 <p className="mt-2 text-sm leading-relaxed text-ink-muted">{biomarker.about}</p>
               </div>
               <div>
                 <h4 className="text-[11px] uppercase tracking-[0.18em] text-ink-faint">
-                  What your result means
+                  Qué significa tu resultado
                 </h4>
                 <p className="mt-2 text-sm leading-relaxed text-ink-muted">
                   {GUIDANCE[biomarker.status]}
@@ -115,14 +115,14 @@ export function BiomarkerDetail({
               </div>
               <div className="rounded-2xl bg-surface p-5">
                 <h4 className="text-[11px] uppercase tracking-[0.18em] text-ink-faint">
-                  Reference range
+                  Rango de referencia
                 </h4>
                 <p className="mt-2 font-mono text-sm tabular-nums text-ink">
                   {biomarker.low} – {biomarker.high} {biomarker.unit}
                 </p>
                 <p className="mt-3 text-xs leading-relaxed text-ink-faint">
-                  Sample values shown for demonstration. Saludly is not a medical device and this
-                  view does not constitute medical advice.
+                  Los valores son de ejemplo. Saludly no es un dispositivo médico y esta vista no
+                  constituye consejo médico.
                 </p>
               </div>
             </div>

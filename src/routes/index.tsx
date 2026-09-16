@@ -6,9 +6,9 @@ import { BiomarkerDetail } from "../components/saludly/BiomarkerDetail";
 import { HealthIndicators } from "../components/saludly/HealthIndicators";
 import { biomarkers, categories, type Biomarker, type BiomarkerStatus } from "../data/biomarkers";
 
-const TITLE = "Saludly — Full body biomarker dashboard";
+const TITLE = "Saludly — Panel integral de biomarcadores";
 const DESCRIPTION =
-  "A minimal, futuristic health dashboard: a 3D body model, 100+ biomarkers grouped by health system, and general health indicators at a glance.";
+  "Panel integral de salud con modelo corporal, más de 100 biomarcadores e indicadores generales personalizados.";
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -27,10 +27,10 @@ export const Route = createFileRoute("/")({
 type Filter = "all" | BiomarkerStatus;
 
 const FILTERS: { key: Filter; label: string }[] = [
-  { key: "all", label: "All" },
-  { key: "optimal", label: "Optimal" },
-  { key: "attention", label: "Attention" },
-  { key: "critical", label: "Critical attention" },
+  { key: "all", label: "Todos" },
+  { key: "optimal", label: "Óptimo" },
+  { key: "attention", label: "Atención" },
+  { key: "critical", label: "Atención crítica" },
 ];
 
 function Index() {
@@ -55,7 +55,7 @@ function Index() {
             <span className="text-lg tracking-tight text-ink">Saludly</span>
           </div>
           <span className="font-mono text-[11px] uppercase tracking-[0.2em] text-ink-faint">
-            Panel · March 2026
+            Panel · marzo de 2026
           </span>
         </header>
 
@@ -69,7 +69,7 @@ function Index() {
           style={{ "--rise-delay": "0.3s" } as CSSProperties}
         >
           <div className="flex flex-wrap items-baseline justify-between gap-4 border-b border-rule pb-4">
-            <h2 className="text-2xl font-light tracking-tight text-ink">Biomarkers</h2>
+            <h2 className="text-2xl font-light tracking-tight text-ink">Biomarcadores</h2>
             <div className="flex flex-wrap gap-2">
               {FILTERS.map((f) => (
                 <button
@@ -98,7 +98,7 @@ function Index() {
           ))}
         </section>
         <footer className="mt-20 border-t border-rule py-8 text-xs text-ink-faint">
-          Sample data shown for demonstration only. Saludly does not provide medical advice.
+          Datos de ejemplo únicamente para demostración. Saludly no ofrece consejo médico.
         </footer>
       </div>
 

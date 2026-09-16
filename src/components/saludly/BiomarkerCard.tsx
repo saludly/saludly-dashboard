@@ -15,7 +15,7 @@ export function BiomarkerCard({
     <button
       type="button"
       onClick={() => onSelect(biomarker)}
-      aria-label={`${biomarker.name}: ${biomarker.value} ${biomarker.unit}, ${biomarker.status}`}
+      aria-label={`${biomarker.name}: ${biomarker.value} ${biomarker.unit}`}
       className="group rounded-2xl border border-rule bg-background px-4 py-4 text-left transition-all duration-300 hover:-translate-y-0.5 hover:border-ink/15 hover:shadow-[0_12px_32px_-20px_rgba(20,30,60,0.45)] focus:outline-none focus-visible:ring-2 focus-visible:ring-ring"
     >
       <div className="flex items-start justify-between gap-3">
