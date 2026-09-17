@@ -1,10 +1,15 @@
 import { Link, useRouterState } from "@tanstack/react-router";
 
-const ITEMS: { label: string; to: "/" | "/protocolo" | "/productos"; hash?: string }[] = [
+const ITEMS: {
+  label: string;
+  to: "/" | "/protocolo" | "/productos" | "/registro";
+  hash?: string;
+}[] = [
   { label: "INICIO", to: "/" },
   { label: "PROTOCOLO", to: "/protocolo" },
   { label: "BIOMARCADORES", to: "/", hash: "biomarcadores" },
   { label: "PRODUCTOS", to: "/productos" },
+  { label: "REGISTRO", to: "/registro" },
 ];
 
 export function FloatingNav() {
