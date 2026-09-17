@@ -12,6 +12,7 @@ import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as ProductosRouteImport } from './routes/productos'
 import { Route as ProtocoloRouteImport } from './routes/protocolo'
+import { Route as RegistroRouteImport } from './routes/registro'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
@@ -28,35 +29,44 @@ const ProtocoloRoute = ProtocoloRouteImport.update({
   path: '/protocolo',
   getParentRoute: () => rootRouteImport,
 } as any)
+const RegistroRoute = RegistroRouteImport.update({
+  id: '/registro',
+  path: '/registro',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/productos': typeof ProductosRoute
   '/protocolo': typeof ProtocoloRoute
+  '/registro': typeof RegistroRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/productos': typeof ProductosRoute
   '/protocolo': typeof ProtocoloRoute
+  '/registro': typeof RegistroRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/productos': typeof ProductosRoute
   '/protocolo': typeof ProtocoloRoute
+  '/registro': typeof RegistroRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/productos' | '/protocolo'
+  fullPaths: '/' | '/productos' | '/protocolo' | '/registro'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/productos' | '/protocolo'
-  id: '__root__' | '/' | '/productos' | '/protocolo'
+  to: '/' | '/productos' | '/protocolo' | '/registro'
+  id: '__root__' | '/' | '/productos' | '/protocolo' | '/registro'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   ProductosRoute: typeof ProductosRoute
   ProtocoloRoute: typeof ProtocoloRoute
+  RegistroRoute: typeof RegistroRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -82,6 +92,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ProtocoloRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/registro': {
+      id: '/registro'
+      path: '/registro'
+      fullPath: '/registro'
+      preLoaderRoute: typeof RegistroRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
@@ -89,6 +106,7 @@ const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   ProductosRoute: ProductosRoute,
   ProtocoloRoute: ProtocoloRoute,
+  RegistroRoute: RegistroRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
