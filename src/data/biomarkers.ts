@@ -168,10 +168,10 @@ const NAME_ES: Record<string, string> = {
   "Glucose (fasting)": "Glucosa en ayunas", "Uric acid": "Ácido úrico", Lactate: "Lactato", Adiponectin: "Adiponectina", Fructosamine: "Fructosamina",
   "Total cholesterol": "Colesterol total", "LDL cholesterol": "Colesterol LDL", "HDL cholesterol": "Colesterol HDL", Triglycerides: "Triglicéridos", "Non-HDL cholesterol": "Colesterol no HDL", "Lipoprotein(a)": "Lipoproteína(a)", "LDL particle number": "Número de partículas LDL", "Small dense LDL": "LDL pequeñas y densas", "Remnant cholesterol": "Colesterol remanente", "Cholesterol / HDL ratio": "Relación colesterol / HDL",
   "Vitamin D (25-OH)": "Vitamina D (25-OH)", "Vitamin B12": "Vitamina B12", Folate: "Folato", "Vitamin B6": "Vitamina B6", "Vitamin B1": "Vitamina B1", "Vitamin A": "Vitamina A", "Vitamin E": "Vitamina E", "Vitamin K1": "Vitamina K1", "Vitamin C": "Vitamina C", Biotin: "Biotina", Niacin: "Niacina", "Omega-3 index": "Índice omega-3", "Coenzyme Q10": "Coenzima Q10",
-  Ferritin: "Ferritina", Iron: "Hierro", "Transferrin saturation": "Saturación de transferrina", Magnesium: "Magnesio", Zinc: "Zinc", Copper: "Cobre", Selenium: "Selenio", Calcium: "Calcio", Phosphorus: "Fósforo", Sodium: "Sodio", Potassium: "Potasio", Chloride: "Cloruro", Iodine: "Yodo",
+  Ferritin: "Ferritina", Iron: "Hierro", "Transferrin saturation": "Saturación de transferrina", "Magnesium (RBC)": "Magnesio eritrocitario", Zinc: "Zinc", Copper: "Cobre", Selenium: "Selenio", Calcium: "Calcio", Phosphorus: "Fósforo", Sodium: "Sodio", Potassium: "Potasio", Chloride: "Cloruro", Iodine: "Yodo",
   "Total bilirubin": "Bilirrubina total", Albumin: "Albúmina", "Total protein": "Proteína total", Creatinine: "Creatinina", "Urine albumin / creatinine": "Albúmina / creatinina en orina",
   Homocysteine: "Homocisteína", Fibrinogen: "Fibrinógeno", "Interleukin-6": "Interleucina-6", "Immunoglobulin G": "Inmunoglobulina G", "Immunoglobulin A": "Inmunoglobulina A", "Immunoglobulin E": "Inmunoglobulina E", "Complement C3": "Complemento C3", "ANA screen": "Prueba ANA", "Thyroid peroxidase antibodies": "Anticuerpos contra la peroxidasa tiroidea",
-  "Telomere length": "Longitud de telómeros",
+  "Troponin (hs)": "Troponina ultrasensible", Myeloperoxidase: "Mieloperoxidasa", "Cortisol / DHEA ratio": "Relación cortisol / DHEA", "Telomere length": "Longitud de telómeros",
 };
 
 const ABOUT_ES: Record<string, string> = {

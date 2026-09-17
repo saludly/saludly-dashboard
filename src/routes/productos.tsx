@@ -4,7 +4,7 @@ import { Minus, Plus, ShoppingBag, Trash2 } from "lucide-react";
 import { Button } from "../components/ui/button";
 import { formatPrice, products, type ProductCategory } from "../data/products";
 
-const TITLE = "Marketplace Saludly — Bienestar personalizado";
+const TITLE = "Tienda Saludly — Bienestar personalizado";
 const DESCRIPTION =
   "Compra suplementos y reserva terapias intravenosas, masajes y paneles de laboratorio seleccionados por Saludly.";
 
@@ -44,7 +44,7 @@ function Productos() {
         <header className="flex flex-wrap items-end justify-between gap-5 border-b border-rule pb-8">
           <div>
             <p className="font-mono text-[10px] uppercase tracking-[0.2em] text-primary">Bienestar seleccionado</p>
-            <h1 className="mt-2 text-4xl font-light tracking-tight text-ink">Marketplace Saludly</h1>
+            <h1 className="mt-2 text-4xl font-light tracking-tight text-ink">Tienda Saludly</h1>
             <p className="mt-3 max-w-2xl text-sm leading-relaxed text-ink-muted">Suplementos y experiencias alineados con tus biomarcadores y tu protocolo personal.</p>
           </div>
           <div className="flex items-center gap-2 rounded-full border border-rule px-4 py-2 text-sm text-ink">
