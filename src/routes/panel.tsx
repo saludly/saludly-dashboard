@@ -10,7 +10,7 @@ const TITLE = "Saludly — Panel integral de biomarcadores";
 const DESCRIPTION =
   "Panel integral de salud con modelo corporal, más de 100 biomarcadores e indicadores generales personalizados.";
 
-export const Route = createFileRoute("/")({
+export const Route = createFileRoute("/panel")({
   head: () => ({
     meta: [
       { title: TITLE },
@@ -21,7 +21,7 @@ export const Route = createFileRoute("/")({
       { name: "twitter:card", content: "summary_large_image" },
     ],
   }),
-  component: Index,
+  component: Panel,
 });
 
 type Filter = "all" | BiomarkerStatus;
@@ -33,7 +33,7 @@ const FILTERS: { key: Filter; label: string }[] = [
   { key: "critical", label: "Atención crítica" },
 ];
 
-function Index() {
+function Panel() {
   const [selected, setSelected] = useState<Biomarker | null>(null);
   const [filter, setFilter] = useState<Filter>("all");
 
