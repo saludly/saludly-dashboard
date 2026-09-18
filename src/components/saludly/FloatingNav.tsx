@@ -1,22 +1,20 @@
 import { Link, useRouterState } from "@tanstack/react-router";
 
-const ITEMS: {
-  label: string;
-  to: "/" | "/protocolo" | "/productos" | "/registro";
-  hash?: string;
-}[] = [
-  { label: "INICIO", to: "/" },
+const ITEMS: { label: string; to: "/panel" | "/protocolo" | "/productos"; hash?: string }[] = [
+  { label: "INICIO", to: "/panel" },
   { label: "PROTOCOLO", to: "/protocolo" },
-  { label: "BIOMARCADORES", to: "/", hash: "biomarcadores" },
+  { label: "BIOMARCADORES", to: "/panel", hash: "biomarcadores" },
   { label: "PRODUCTOS", to: "/productos" },
-  { label: "REGISTRO", to: "/registro" },
 ];
 
 export function FloatingNav() {
   const { pathname, hash } = useRouterState({ select: (s) => s.location });
 
+  // El flujo de bienvenida no muestra el menú.
+  if (pathname === "/") return null;
+
   const activeIndex = ITEMS.findIndex((i) =>
-    i.hash ? pathname === "/" && hash === i.hash : i.to === pathname && !hash,
+    i.hash ? pathname === "/panel" && hash === i.hash : i.to === pathname && !hash,
   );
 
   return (
