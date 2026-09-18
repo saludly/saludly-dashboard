@@ -13,7 +13,6 @@ import { Route as IndexRouteImport } from './routes/index'
 import { Route as PanelRouteImport } from './routes/panel'
 import { Route as ProductosRouteImport } from './routes/productos'
 import { Route as ProtocoloRouteImport } from './routes/protocolo'
-import { Route as RegistroRouteImport } from './routes/registro'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
@@ -35,25 +34,18 @@ const ProtocoloRoute = ProtocoloRouteImport.update({
   path: '/protocolo',
   getParentRoute: () => rootRouteImport,
 } as any)
-const RegistroRoute = RegistroRouteImport.update({
-  id: '/registro',
-  path: '/registro',
-  getParentRoute: () => rootRouteImport,
-} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/panel': typeof PanelRoute
   '/productos': typeof ProductosRoute
   '/protocolo': typeof ProtocoloRoute
-  '/registro': typeof RegistroRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/panel': typeof PanelRoute
   '/productos': typeof ProductosRoute
   '/protocolo': typeof ProtocoloRoute
-  '/registro': typeof RegistroRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -61,14 +53,13 @@ export interface FileRoutesById {
   '/panel': typeof PanelRoute
   '/productos': typeof ProductosRoute
   '/protocolo': typeof ProtocoloRoute
-  '/registro': typeof RegistroRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/panel' | '/productos' | '/protocolo' | '/registro'
+  fullPaths: '/' | '/panel' | '/productos' | '/protocolo'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/panel' | '/productos' | '/protocolo' | '/registro'
-  id: '__root__' | '/' | '/panel' | '/productos' | '/protocolo' | '/registro'
+  to: '/' | '/panel' | '/productos' | '/protocolo'
+  id: '__root__' | '/' | '/panel' | '/productos' | '/protocolo'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -76,7 +67,6 @@ export interface RootRouteChildren {
   PanelRoute: typeof PanelRoute
   ProductosRoute: typeof ProductosRoute
   ProtocoloRoute: typeof ProtocoloRoute
-  RegistroRoute: typeof RegistroRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -109,13 +99,6 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ProtocoloRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/registro': {
-      id: '/registro'
-      path: '/registro'
-      fullPath: '/registro'
-      preLoaderRoute: typeof RegistroRouteImport
-      parentRoute: typeof rootRouteImport
-    }
   }
 }
 
@@ -124,7 +107,6 @@ const rootRouteChildren: RootRouteChildren = {
   PanelRoute: PanelRoute,
   ProductosRoute: ProductosRoute,
   ProtocoloRoute: ProtocoloRoute,
-  RegistroRoute: RegistroRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
