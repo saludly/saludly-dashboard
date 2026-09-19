@@ -66,7 +66,6 @@ const STEP_LABELS = [
   "Lo que está óptimo",
   "Lo que requiere atención",
   "Tu protocolo",
-  "Tu cuenta",
 ];
 
 function Onboarding() {
@@ -75,22 +74,18 @@ function Onboarding() {
   const [goals, setGoals] = useState<string[]>([]);
   const [habit, setHabit] = useState("");
   const [sleep, setSleep] = useState("");
-  const [email, setEmail] = useState("");
 
   const toggleGoal = (id: string) =>
     setGoals((prev) =>
       prev.includes(id) ? prev.filter((g) => g !== id) : prev.length >= 3 ? prev : [...prev, id],
     );
 
-  const emailOk = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(email.trim());
-
   const canContinue = useMemo(() => {
     if (step === 0) return goals.length === 3;
     if (step === 1) return habit !== "";
     if (step === 2) return sleep !== "";
-    if (step === 8) return emailOk;
     return true;
-  }, [step, goals, habit, sleep, emailOk]);
+  }, [step, goals, habit, sleep]);
 
   const last = step === STEP_LABELS.length - 1;
 
