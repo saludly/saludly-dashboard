@@ -415,32 +415,6 @@ function Onboarding() {
             </div>
           )}
 
-          {step === 8 && (
-            <div>
-              <h1 className="text-3xl font-light tracking-tight text-ink sm:text-4xl">
-                Creamos tu cuenta.
-              </h1>
-              <p className="mt-3 max-w-xl text-sm leading-relaxed text-ink-muted">
-                Déjanos tu correo y te enviamos una contraseña para entrar a tu panel cuando quieras.
-              </p>
-              <label className="mt-8 block max-w-md">
-                <span className="font-mono text-[10px] uppercase tracking-[0.16em] text-ink-faint">
-                  Correo electrónico
-                </span>
-                <input
-                  value={email}
-                  type="email"
-                  autoComplete="email"
-                  onChange={(e) => setEmail(e.target.value)}
-                  placeholder="tucorreo@ejemplo.com"
-                  className="mt-2 w-full rounded-xl border border-rule bg-background px-4 py-3 text-sm text-ink outline-none transition-colors focus:border-optimal"
-                />
-              </label>
-              <p className="mt-3 text-xs leading-relaxed text-ink-muted">
-                En esta demostración no se envía ningún correo ni se guarda tu información.
-              </p>
-            </div>
-          )}
         </section>
 
         <p className="mt-10 text-xs text-ink-faint">
@@ -465,7 +439,7 @@ function Onboarding() {
             disabled={!canContinue}
             className="flex-1 rounded-full bg-optimal px-6 py-4 text-base text-primary-foreground transition-opacity duration-300 disabled:cursor-not-allowed disabled:opacity-40"
           >
-            {last ? "Crear mi cuenta y entrar" : "Continuar"}
+            {last ? "Entrar a mi panel" : "Continuar"}
           </button>
         </div>
       </div>
